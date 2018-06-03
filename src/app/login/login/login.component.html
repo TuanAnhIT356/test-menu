@@ -1,0 +1,86 @@
+<div class="bg-login flex-container">
+    <!--login-box-->
+    <div class="login-box flex-item">
+
+        <!-- login-logo -->
+        <div class="logo">
+            <img class="img-logo" src="../../../assets/img/ic_logo.png">
+            <div class="title">
+                <a [routerLink]="['/login']">ĐĂNG NHẬP HỆ THỐNG</a>
+            </div>
+        </div>
+        <!-- end login-logo -->
+        <!--loading-->
+        <p class="login-box-msg">Đăng nhập để bắt đầu phiên của bạn</p>
+        <div *ngIf="loading">
+            <fa name="spinner" animation="spin"></fa>
+            <label>Đăng đăng nhập</label>
+        </div>
+        <!--end loading-->
+        <!--form login-->
+        <div *ngIf="!loading">
+            <form (ngSubmit)="onSubmit()" novalidate
+                  [formGroup]="form">
+                <!--input email-->
+                <div class="form-group has-feedback "
+                     [ngClass]="{
+                        'has-error': email.invalid && (email.dirty || email.touched),
+                        'has-success': email.valid && (email.dirty || email.touched)
+                        }">
+                    <input type="email" class="form-control" #inputE formControlName="email" placeholder="Email">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <div class="text-danger text-error">
+                        <ng-container *ngIf="email.errors && (email.dirty || email.touched)">
+                            <p *ngIf="email.errors?.required">Xin vui lòng nhập email</p>
+                            <p *ngIf="!email.errors?.required && email.errors?.minlength">Email phải lớn hơn 6 ký tự</p>
+                            <p *ngIf="!email.errors?.required && email.errors?.maxlength">Email phải nhỏ hơn 50 ký tự</p>
+                            <p *ngIf="!email.errors?.required && !email.errors?.minlength && !email.errors?.maxlength &&email.errors?.email">Email không đúng định dạng</p>
+                        </ng-container>
+                    </div>
+                </div>
+                <!--end input email-->
+                <!--input password-->
+                <div class="form-group has-feedback"
+                     [ngClass]="{
+                        'has-error': password.invalid && (password.dirty || password.touched),
+                        'has-success': password.valid && (password.dirty || password.touched)
+                        }">
+                    <input type="password" class="form-control" #inputP formControlName="password" placeholder="Password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <div class="text-danger text-error">
+                        <ng-container *ngIf="password.errors && (password.dirty || password.touched)">
+                            <p *ngIf="password.errors?.required">Xin vui lòng nhập mật khẩu</p>
+                            <p *ngIf="!password.errors?.required && password.errors?.minlength">Mật khẩu lớn hơn 6 ký tự</p>
+                            <p *ngIf="!password.errors?.required && password.errors?.maxlength">Mật khẩu nhỏ hơn 20 ký tự</p>
+                        </ng-container>
+                    </div>
+                </div>
+                <!--end input password-->
+                <!--check remember-->
+                <div class="form-group">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input type="checkbox" formControlName="remember"> Ghi nhớ
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <!--end check remember-->
+                <!-- btn login-->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">
+                        Đăng nhập
+                    </button>
+                </div>
+                <!-- end btn login-->
+            </form>
+            <a [routerLink]="['/sign-in']">Đăng ký</a>
+        </div>
+        <!--end form login-->
+        <br>
+
+    </div>
+    <!-- end login-box -->
+</div>

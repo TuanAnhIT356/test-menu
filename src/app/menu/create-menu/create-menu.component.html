@@ -1,0 +1,124 @@
+<!--preloader-->
+<div class="preloader" *ngIf="loadingData">
+    <fa class="ic-loading" name="spinner" animation="spin" size="4x"></fa>
+</div>
+<!--end preloader-->
+
+<div class="wrapper">
+    <!--top header-->
+    <app-top-header [name]="name" [email]="email" [avata]="avata"></app-top-header>
+    <!--top header-->
+    <!--left-sidebar-->
+    <app-left-sidebar [menu]="menu"></app-left-sidebar>
+    <!--Content-->
+    <div class="content-wrapper">
+        <!--breadcrumb-->
+        <app-breadcrumb></app-breadcrumb>
+        <!--end breadcrumb-->
+        <!--content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <!--title-->
+                        <div class="box-header with-border">
+                            <a (click)="onBack()">
+                                <h3 class="box-title">
+                                    <fa name="chevron-left"></fa>
+                                    Thêm mới menu
+                                </h3>
+                            </a>
+                        </div>
+                        <div class="box-body" style="padding: 30px">
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <!--table-->
+                                <form class="col-md-6" style="text-align: left" (ngSubmit)="onSubmit()" novalidate
+                                      [formGroup]="form">
+                                    <!--inputname-->
+                                    <div class="form-group has-feedback "
+                                         [ngClass]="{
+                                        'has-error': inputname.invalid && (inputname.dirty || inputname.touched),
+                                        'has-success': inputname.valid && (inputname.dirty || inputname.touched)
+                                        }">
+                                        <label>Tên<span class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control" #inputN formControlName="inputname" placeholder="Name">
+                                        <div class="text-danger text-error">
+                                            <ng-container *ngIf="inputname.errors && (inputname.dirty || inputname.touched)">
+                                                <p *ngIf="inputname.errors?.required">Xin vui lòng nhập name</p>
+                                                <p *ngIf="!inputname.errors?.required && inputname.errors?.minlength">Name phải lớn hơn 2 ký tự</p>
+                                                <p *ngIf="!inputname.errors?.required && inputname.errors?.maxlength">Name phải nhỏ hơn 50 ký tự</p>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <!--end inputname-->
+                                    <!--inputroute-->
+                                    <div class="form-group has-feedback"
+                                         [ngClass]="{
+                                        'has-error': inputroute.invalid && (inputroute.dirty || inputroute.touched),
+                                        'has-success': inputroute.valid && (inputroute.dirty || inputroute.touched)
+                                        }">
+                                        <label>Đường dẫn<span class="text-danger"> *</span></label>
+                                        <input type="text" class="form-control" #inputR formControlName="inputroute" placeholder="Route">
+                                        <div class="text-danger text-error">
+                                            <ng-container *ngIf="inputroute.errors && (inputroute.dirty || inputroute.touched)">
+                                                <p *ngIf="inputroute.errors?.required">Xin vui lòng nhập route</p>
+                                                <p *ngIf="!inputroute.errors?.required && inputroute.errors?.minlength">Route lớn hơn 1 ký tự</p>
+                                                <p *ngIf="!inputroute.errors?.required && inputroute.errors?.maxlength">Route nhỏ hơn 20 ký tự</p>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <!--end inputroute-->
+                                    <!--inputsort-->
+                                    <div class="form-group has-feedback">
+                                        <label>Xắp xếp</label>
+                                        <input type="text" class="form-control" formControlName="inputsort" placeholder="Sort" (keypress)="keyPress($event)">
+                                    </div>
+                                    <!--end inputsort-->
+                                    <!--inputdescription-->
+                                    <div class="form-group has-feedback">
+                                        <label>Miêu tả</label>
+                                        <input type="text" class="form-control" formControlName="inputdescription" placeholder="Description">
+                                    </div>
+                                    <!--end inputdescription-->
+                                    <!--inputparents-->
+                                    <div class="form-group has-feedback">
+                                        <label>Menu cha</label>
+                                        <input type="text" class="form-control" formControlName="inputparents" placeholder="Parents" (keypress)="keyPress($event)">
+                                    </div>
+                                    <!--end inputparents-->
+                                    <!-- btn lưu-->
+                                    <div class="form-group">
+                                        <button *ngIf="!loading" type="submit" class="btn btn-primary btn-block btn-flat">
+                                            Lưu
+                                        </button>
+                                        <div *ngIf="loading" class="btn btn-primary btn-block btn-flat">
+                                            <fa name="spinner" animation="spin"></fa>
+                                            Đang lưu
+                                        </div>
+                                    </div>
+                                    <!-- end btn lưu-->
+                                </form>
+                                <!--end table-->
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- end content -->
+    </div>
+    <!--end Content-->
+    <!--footer-->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+        </div>
+    </footer>
+    <!--end footer-->
+    <div class="control-sidebar-bg"></div>
+</div>
+
+

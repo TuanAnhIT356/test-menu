@@ -1,0 +1,29 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="treeview" *ngFor="let Item of menu;let i = index">
+                <ng-container *ngIf="Item.modeCon.length == 0">
+                    <a [routerLink]="[Item.route]">
+                        <i class="fa fa-share"></i>
+                        <span>{{Item.name}}</span>
+                    </a>
+                </ng-container>
+                <ng-container *ngIf="Item.modeCon.length > 0">
+                    <a >
+                        <i class="fa fa-share"></i>
+                        <span>{{Item.name}}</span>
+                        <span class="pull-right-container" >
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu" style="min-height: 40px;padding-left: 10px">
+                        <app-item-sidebar [menu]="Item.modeCon"></app-item-sidebar>
+                    </ul>
+                </ng-container>
+
+            </li>
+        </ul>
+    </section>
+
+</aside>

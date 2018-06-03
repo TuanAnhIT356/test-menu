@@ -1,0 +1,125 @@
+<!--preloader-->
+<div class="preloader" *ngIf="loadingData">
+    <fa class="ic-loading" name="spinner" animation="spin" size="4x"></fa>
+</div>
+<!--end preloader-->
+<div class="wrapper">
+    <!--top header-->
+    <app-top-header [name]="name" [email]="email" [avata]="avata"></app-top-header>
+    <!--top header-->
+    <!--left-sidebar-->
+    <app-left-sidebar [menu]="menu"></app-left-sidebar>
+    <!--Content-->
+    <div class="content-wrapper">
+        <!--breadcrumb-->
+        <app-breadcrumb></app-breadcrumb>
+        <!--end breadcrumb-->
+        <!--content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <!--title-->
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Danh sách menu</h3>
+                        </div>
+                        <!--end title-->
+                        <!--table-->
+                        <div class="box-body" style="padding: 30px">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th style="width: 10px">id</th>
+                                    <th>Tên</th>
+                                    <th>Đường dẫn</th>
+                                    <th>Sắp xếp</th>
+                                    <th>Miêu tả</th>
+                                    <th>Menu Cha</th>
+                                    <th style="width: 80px"></th>
+                                    <th style="width: 80px"></th>
+                                </tr>
+                                <!--loading table-->
+                                <tr *ngIf="loadingTable ">
+                                    <td colspan="8" align="center">
+                                        <fa name="spinner" animation="spin"></fa>
+                                        Đang tải dữ liệu
+                                    </td>
+                                </tr>
+                                <!--end loading table-->
+                                <!--not data -->
+                                <tr *ngIf="DataMenu.length == 0 && !loadingTable ">
+                                    <td colspan="8" align="center">
+                                        Không có dữ liệu
+                                    </td>
+                                </tr>
+                                <!--end not data -->
+
+                                <ng-container *ngIf="DataMenu.length > 0 && !loadingTable ">
+                                    <tr *ngFor="let Item of DataMenu;let i = index">
+                                        <td>{{Item.id}}</td>
+                                        <td>{{Item.name}}</td>
+                                        <td>{{Item.route}}</td>
+                                        <td>{{Item.sort}}</td>
+                                        <td>{{Item.description}}</td>
+                                        <td>{{Item.parents}}</td>
+                                        <td>
+                                            <a [routerLink]="['/update-menu',Item.id]">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i> Sửa
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a (click)="showModalDel(Item.id)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i> Xóa
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+
+                            </table>
+                        </div>
+                        <!--table-->
+                        <app-paging [route]="'/menu'" [page]="page" [numberPage]="numberPage" class="text-right" style="margin-right: 50px"></app-paging>
+                        <!--btn add-->
+                        <div class="box-add text-center">
+                            <a class="btn btn-add btn-success" [routerLink]="['/create-menu']">
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                <span>Thêm Menu</span>
+                            </a>
+                        </div>
+                        <br>
+                        <br>
+                        <!--end btn add-->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- end content -->
+    </div>
+    <!--end Content-->
+    <!--footer-->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+        </div>
+    </footer>
+    <!--end footer-->
+    <div class="control-sidebar-bg"></div>
+</div>
+
+<!--modal del-->
+<div class="modal fade" id="myModalDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal"></button>
+            <div class="modal-body">
+                <div class="confirm">
+                    <div class="alert-confirm">Bạn có chắc muốn xóa bản ghi này?</div>
+                    <div class="box-btn">
+                        <button class="btn btn-main" type="submit" (click)="onDelete()">Đồng ý</button>
+                        <button class="btn" data-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end modal del-->

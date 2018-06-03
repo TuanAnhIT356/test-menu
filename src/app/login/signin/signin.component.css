@@ -1,0 +1,65 @@
+.flex-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex-direction: row;
+    -moz-box-flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-signin {
+    background-color: #ecf5fd;
+    height: 100%;
+}
+
+.flex-item {
+    margin: auto;
+}
+
+.signin-box {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    min-width: 400px;
+    margin: auto;
+    padding: 30px 50px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    text-align: center;
+}
+
+.img-logo {
+    width: 200px;
+    height: auto;
+}
+.title {
+    margin-bottom: 20px;
+}
+.title a{
+    font-size: 18px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 26px;
+    color: #666;
+}
+
+form {
+    text-align: left;
+}
+
+.text-error{
+    font-size: 14px;
+}

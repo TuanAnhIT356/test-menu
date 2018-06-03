@@ -1,0 +1,28 @@
+<ng-container *ngFor="let Item of menu;let i = index">
+    <li *ngIf="Item.modeCon.length == 0"
+        style="min-height: 30px;
+                width: 100%;
+                margin: ao;
+                margin: auto;
+                padding-top: 5px;">
+        <a [routerLink]="[Item.route]">
+            <i class="fa fa-circle-o"></i> {{Item.name}}
+        </a>
+    </li>
+    <li class="treeview" *ngIf="Item.modeCon.length > 0"
+        style="min-height: 30px;
+                width: 100%;
+                margin: ao;
+                margin: auto;
+                padding-top: 5px;">
+        <a  style="min-width: 180px">
+            <i class="fa fa-circle-o"></i> {{Item.name}}
+            <span class="pull-right-container" style="position: initial;">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu" style="min-height: 40px;">
+            <app-item-sidebar [menu]="Item.modeCon"></app-item-sidebar>
+        </ul>
+    </li>
+</ng-container>
